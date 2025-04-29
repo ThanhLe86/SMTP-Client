@@ -32,7 +32,7 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 
 
-## How to install
+## How to install and run
 - Pull the project to your device
 - In `JAVA PROJECTS` (bottom left of the screen), find 'Referenced Libraries' and add all JavaFX .jar files in lib folder (currently 24.0.1)
 - In launch.json, look for "vmArgs", then change the module path "D:/openjfx-24.0.1_windows-x64_bin-sdk/javafx-sdk-24.0.1/lib" to your local JavaFX SDK's lib folder.

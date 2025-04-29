@@ -59,7 +59,7 @@ public class Main extends Application {
 	}
 
 }
-/* 
+/*  content pf this function is implemented in Controller.java, private void HandleLogIn()
 public class Main {
     public static void main(String[] args) throws IOException {
         SMTP_Connection tempConnection = new SMTP_Connection("smtp.gmail.com", 587); //includes connecting and attempting comm

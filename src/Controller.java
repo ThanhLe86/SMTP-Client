@@ -5,6 +5,7 @@
  * - implement logics for account in HandleLogIn
  */
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -69,7 +70,6 @@ public class Controller implements Initializable{
          
     }
       
-  
     public static void storeCurrentScreen(String currentScreen) {
         //debug: LogIn.fxml will always in stack, to prevent it from being empty (when returning from Main.fxml)
         //currently not working
@@ -84,21 +84,35 @@ public class Controller implements Initializable{
     }
  
     @FXML
-    private void HandleLogIn(ActionEvent event) {
+    private void HandleLogIn(ActionEvent event) throws IOException {
         warningLabel.setVisible(false);
  
         this.email = userEmail.getText();
         this.password = userPassword.getText();
  
-        //implement logics for accounts here. current default is not null
+        //default logics is not null
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             // Handle case where user didn't select both
             warningLabel.setVisible(true);
             warningLabel.setText("Email or password cannot be empty.");
             System.out.println("Email or password cannot be empty.");
-            return; // Or show an alert
+            return; 
         }
- 
+
+        //create SMTP connection and check if it's work, otherwise return
+        SMTP_Connection tempConnection = new SMTP_Connection("smtp.gmail.com", 587); //includes connecting and attempting comm
+        AuthenticationManager tempAuthenticator = new AuthenticationManager(this.email, this.password);
+
+        if(!tempAuthenticator.Authenticate(tempConnection)){
+            tempConnection.Quit();
+
+            warningLabel.setVisible(true);
+            warningLabel.setText("Authenication failed. Please check your email and password.");
+            return;
+        }
+
+
+        
         System.out.println("Email: " + email);
         System.out.println("Password: " + password);
         LoadMainScreen(event);

@@ -2,18 +2,6 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.base.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.controls.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.fxml.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.graphics.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.media.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.swing.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx.web.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\javafx-swt.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\jdk.jsobject.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\jfx.incubator.input.jar",
-        "d:\\GitHub\\javafx-sdk-24.0.1\\SMTP-Client\\lib\\jfx.incubator.richtext.jar"
-    ],
-    "java.compile.nullAnalysis.mode": "automatic"
+        "lib/**/*.jar"
+    ]
 }

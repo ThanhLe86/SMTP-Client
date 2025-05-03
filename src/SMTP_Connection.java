@@ -12,22 +12,30 @@ public class SMTP_Connection {
         socket = new Socket(addr, port);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-        String response = in.readLine();
+        String response = in.readLine(); //variable to contain the first line of server response -> for sampling purposes
 
-        if(!response.startsWith("220")) 
+        if(!response.startsWith("220")) //sampling
         {
             System.err.println("Connection failed: ");
+            System.out.println(response); // print first line of response
+            printServerResponse(); //print out the rest of the response 
+        }
+        else System.out.println("Connection successful!");
+
+        verifyConnection();
+
+        // Negotiate TLS
+        out.write("STARTTLS\r\n");
+        out.flush();
+        response = in.readLine();
+        if(!response.startsWith("220")){
+            System.out.println("STARTTLS failed, server response: ");
             System.out.println(response);
             printServerResponse();
-        }
+            Quit();
+        } else System.out.println("STARTTLS successful");
 
-        else System.out.println("Connection successful!");
-        
-        //Attempt communication
-        out.write("EHLO test.client\r\n");
-        out.flush();
-        System.out.println("Server response: "); //250 means success
-        printServerResponse();
+        if(!verifyConnection()){Reset(); Quit();}
     } 
 
     public void Reset() throws IOException{
@@ -57,5 +65,26 @@ public class SMTP_Connection {
             response = in.readLine();
             System.out.println(response);
         } while (response != null && response.length() >= 4 && response.charAt(3) == '-');
+    }
+
+    public boolean verifyConnection() throws IOException{
+        
+        //Attempt communication
+        String response;
+        out.write("EHLO test.client\r\n");
+        out.flush();
+        response = in.readLine(); //250 means success
+        if(response.startsWith("250")) {
+            System.out.println("Communication attempt with EHLO succeeded");
+            System.out.println(response);
+            printServerResponse();
+            return true;
+        }
+        else {
+            System.out.println("EHLO test failed, Server response: "); 
+            System.out.println(response);
+            printServerResponse();
+        }
+        return false;
     }
 }

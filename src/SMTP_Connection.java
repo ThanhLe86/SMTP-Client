@@ -1,6 +1,9 @@
 import java.io.*;
 import java.net.Socket;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+
 public class SMTP_Connection {
     public Socket socket;
     public BufferedReader in;
@@ -35,7 +38,15 @@ public class SMTP_Connection {
             Quit();
         } else System.out.println("STARTTLS successful");
 
-        if(!verifyConnection()){Reset(); Quit();}
+        sslSocketWrapper();
+
+        // if(!verifyConnection()){Reset(); Quit();}
+
+        out.write("EHLO test.client\r\n");
+        out.flush();
+        response = in.readLine();
+        System.out.println(response);
+        printServerResponse();
     } 
 
     public void Reset() throws IOException{
@@ -87,4 +98,19 @@ public class SMTP_Connection {
         }
         return false;
     }
+
+    //after this, in and out will be wrapped with sslSocket
+    public void sslSocketWrapper() throws IOException{
+        SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket(
+            socket,
+            socket.getInetAddress().getHostAddress(),
+            socket.getPort(),
+            true
+        );
+
+        in = new BufferedReader(new InputStreamReader(sslSocket.getInputStream()));
+        out = new BufferedWriter(new OutputStreamWriter(sslSocket.getOutputStream()));
+    }
+
 }

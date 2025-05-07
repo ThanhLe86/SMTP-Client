@@ -21,6 +21,10 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 - If you are hesitant to connect to big name servers, there is an attached .jar file in the project called "fakeSMTP-2.0.jar". This is a program that allows you to test your local SMTP client by mimicking an email server. This program allows you to test connecting to an email server, sending various messages as well as sending a an email. 
 
+### Update 07.05.2025
+- The authentication step was completed successfully and here are the steps to properly sign in when using this project application. To properly authenticate, first you would need to create an app password for your google account; Go to this link: ***[critical update](https://myaccount.google.com/apppasswords)*** and create it by typing in your app name. To be sure, you should set the app name as "test.client" since it is the same as the name our app client declares itself as during EHLO testing. Goodgle will then generate a 16-digit password dedicated for your app to use to authenticate when attempting to use the Google account. Copy that and use it from now on when you attempt to sign in to the account using this project application. 
+- It is important to note that since Google changed its security features, using your conventional account password and username will not work since Google will reject it for being an unsecure connection attempt
+
 ## How to operate fakeSMTP-2.0.jar
 - Double click on the .jar file in File Explorer, then configure the "Listening port" to 587 and press "Start server".
 - In your program, change the 'addr' in Main.java to "localhost" and run the program.

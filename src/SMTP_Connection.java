@@ -39,6 +39,7 @@ public class SMTP_Connection {
         } else System.out.println("STARTTLS successful");
 
         sslSocketWrapper();
+        // sslChecker(); This doesnt work
 
         // if(!verifyConnection()){Reset(); Quit();}
 
@@ -113,4 +114,23 @@ public class SMTP_Connection {
         out = new BufferedWriter(new OutputStreamWriter(sslSocket.getOutputStream()));
     }
 
+    public boolean sslChecker() {
+        if(socket instanceof SSLSocket) {
+            System.out.println("Socket has been wrapped in SSL");
+            return true;
+        } else {
+            System.out.println("Socket is not wrapped in SSL");
+            return false;
+        }
+    }
+
+    public String serverResponseReader() throws IOException{ //New way to read server response
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        do {
+            responseLine = in.readLine();
+            response.append(responseLine + "\r\n");
+        } while (responseLine != null && responseLine.length() >= 4 && responseLine.charAt(3) == '-');
+        return response.toString();
+    }
 }

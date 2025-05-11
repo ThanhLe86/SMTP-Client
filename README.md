@@ -21,14 +21,32 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 - If you are hesitant to connect to big name servers, there is an attached .jar file in the project called "fakeSMTP-2.0.jar". This is a program that allows you to test your local SMTP client by mimicking an email server. This program allows you to test connecting to an email server, sending various messages as well as sending a an email. 
 
+## How to operate fakeSMTP-2.0.jar
+- Double click on the .jar file in File Explorer, then configure the "Listening port" to 587 and press "Start server".
+- In your program, change the 'addr' in Main.java to "localhost" and run the program.
+- Caveat: It is still not clear if fakeSMTP can successfully receive emails from the program yet. Additionally, one drawback of fakeSMTP is that it does not feature authentication process like big email servers, so it is currently still best to test the program using google's gmail server.
+
 ### Update 07.05.2025
 - The authentication step was completed successfully and here are the steps to properly sign in when using this project application. To properly authenticate, first you would need to create an app password for your google account; Go to this link: ***[critical update](https://myaccount.google.com/apppasswords)*** and create it by typing in your app name. To be sure, you should set the app name as "test.client" since it is the same as the name our app client declares itself as during EHLO testing. Goodgle will then generate a 16-digit password dedicated for your app to use to authenticate when attempting to use the Google account. Copy that and use it from now on when you attempt to sign in to the account using this project application. 
 - It is important to note that since Google changed its security features, using your conventional account password and username will not work since Google will reject it for being an unsecure connection attempt
 
-## How to operate fakeSMTP-2.0.jar
-- Double click on the .jar file in File Explorer, then configure the "Listening port" to 587 and press "Start server".
-- In your program, change the 'addr' in Main.java to "localhost" and run the program.
-- Caveat: It is still not clear if fakeSMTP can successfully receive emails from the program yet since the sending capability has not been implemented. Additionally, one drawback of fakeSMTP is that it does not feature authentication process like big email servers, so it is currently still best to test the program using google's gmail server.
+### Update 11.05.2025
+- Sending functionality was implemented successfully with some drawbacks, here is how it works:
+    - Once Authentication is completed, the email can be generated requiring 3 basic components: Subject, Sender, Recipient, and Email Content. 
+    - We initiate the email sending with by specifying the sender with "MAIL FROM:" and the recipient with "RCPT TO:". Once the server has confirmed these two steps as successful with the response starting with 250, we start crafting the email with "DATA" as follows:
+        C: Subject: Hello from Java
+        C: From: you@gmail.com
+        C: To: someone@example.com
+        C:
+        C: This is a test email sent from my custom SMTP client.
+        C:
+        C: Regards,
+        C: Me
+        C: .
+    The "." at the end is to signify to the server that the message is completed and ready to be sent. The server then sends a message starting with 250 to confirm sending and you can end the transaction.
+- All of the steps above mostly happen in the backend. To implement sending feature into the GUI, follow the program flow in the file Main.java.
+
+- Caveat: The sent mail will appear in the Spam inbox and has both the subject and the content as "null". This will be worked on later.
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 

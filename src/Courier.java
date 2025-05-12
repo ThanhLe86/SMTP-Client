@@ -7,11 +7,11 @@ public class Courier {
     private String mailSubject;
     
     // Once all the necessary information has been input by the user
-    public Courier(String sender, String rcpt, String mailContent, String mailSubject){
-        sender = sender;
+    public Courier(String sendr, String rcpt, String Content, String Subject){
+        sender = sendr;
         recipient = rcpt;
-        mailContent = mailContent;
-        mailSubject = mailSubject;
+        mailContent = Content;
+        mailSubject = Subject;
     }
 
     //function runs when pressing "Send"
@@ -66,8 +66,13 @@ public class Courier {
                       "\r\n" +
                       mailContent;
         
-        connection.out.write(sendingContent + "\r\n");
-        connection.out.write(".\r\n");
+        
+        // System.out.println("=== Email content ===");
+        // System.out.println(mailContent);
+        // System.out.println("=====================");
+              
+        connection.out.write(sendingContent);
+        connection.out.write("\r\n.\r\n");
         connection.out.flush();
         serverResponse = connection.serverResponseReader();
         if(!serverResponse.startsWith("250")){

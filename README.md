@@ -34,7 +34,15 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 - Sending functionality was implemented successfully with some drawbacks, here is how it works:
     - Once Authentication is completed, the email can be generated requiring 3 basic components: Subject, Sender, Recipient, and Email Content. 
     - We initiate the email sending with by specifying the sender with "MAIL FROM:" and the recipient with "RCPT TO:". Once the server has confirmed these two steps as successful with the response starting with 250, we start crafting the email with "DATA" as follows:
-        <pre> \```text C: Subject: Hello from Java C: From: you@gmail.com C: To: someone@example.com C: C: This is a test email sent from my custom SMTP client. C: C: Regards, C: Me C: . \``` </pre>
+        C: Subject: Hello from Java
+        C: From: you@gmail.com
+        C: To: someone@example.com
+        C:
+        C: This is a test email sent from my custom SMTP client.
+        C:
+        C: Regards,
+        C: Me
+        C: .
     The "." at the end is to signify to the server that the message is completed and ready to be sent. The server then sends a message starting with 250 to confirm sending and you can end the transaction.
 - All of the steps above mostly happen in the backend. To implement sending feature into the GUI, follow the program flow in the file Main.java.
 

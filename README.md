@@ -26,6 +26,17 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 - In your program, change the 'addr' in Main.java to "localhost" and run the program.
 - Caveat: It is still not clear if fakeSMTP can successfully receive emails from the program yet. Additionally, one drawback of fakeSMTP is that it does not feature authentication process like big email servers, so it is currently still best to test the program using google's gmail server.
 
+## How to install and run
+- Pull the project to your device
+- In `JAVA PROJECTS` (bottom left of the screen), find 'Referenced Libraries' and add all JavaFX .jar files in lib folder (currently 24.0.1)
+- In launch.json, look for "vmArgs", then change the module path "D:/openjfx-24.0.1_windows-x64_bin-sdk/javafx-sdk-24.0.1/lib" to your local JavaFX SDK's lib folder.
+- Use Ctrl+Alt+N to run code or click on the triangle on the top right of the screen
+
+## TO DO
+- Debug the stack screenHistory in Controller.java: current cannot turn back to LogIn.fxml from Main.fxml
+
+
+
 ### Update 07.05.2025
 - The authentication step was completed successfully and here are the steps to properly sign in when using this project application. To properly authenticate, first you would need to create an app password for your google account; Go to this link: ***[critical update](https://myaccount.google.com/apppasswords)*** and create it by typing in your app name. To be sure, you should set the app name as "test.client" since it is the same as the name our app client declares itself as during EHLO testing. Goodgle will then generate a 16-digit password dedicated for your app to use to authenticate when attempting to use the Google account. Copy that and use it from now on when you attempt to sign in to the account using this project application. 
 - It is important to note that since Google changed its security features, using your conventional account password and username will not work since Google will reject it for being an unsecure connection attempt

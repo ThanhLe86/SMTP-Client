@@ -1,0 +1,132 @@
+/*
+ * Control Main.fxml, main interaction of the app
+ * 
+ * TO DO:
+ * - implement a class to store emails so that we can display email in the TableView
+ */
+import java.awt.Event;
+import java.awt.MediaTracker;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.security.PublicKey;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Stack;
+ 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
+
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;   //clicks on emails
+
+public class MainScreenController implements Initializable {
+
+    //for .fxml elements
+    @FXML
+    private Button composeButton;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Button bookmarkedButton;
+
+    @FXML
+    private Button logOutButton;
+
+    @FXML
+    private TableView<String> emailTableView;
+
+    @FXML
+    private TableColumn<String, String> dateColumn;
+
+    @FXML
+    private TableColumn<String, String> recipientColumn;
+
+    @FXML
+    private TableColumn<String, String> headerColumn;
+    
+    @FXML
+	private Button exitButton;
+
+    //for the system
+    private String userEmail;
+    private String userPassword;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	composeButton.setVisible(true);
+        deleteButton.setVisible(true);
+        bookmarkedButton.setVisible(true);
+
+        // Link each column to the Email class properties
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        recipientColumn.setCellValueFactory(new PropertyValueFactory<>("recipient"));
+        headerColumn.setCellValueFactory(new PropertyValueFactory<>("header"));
+        emailTableView.setPlaceholder(new Label("No emails yet"));
+
+        // Initialization logic if needed (e.g., setting up the gridPane)
+    }
+
+    public void initializeData(String email, String password) {
+        this.userEmail = email;
+        this.userPassword = password;
+
+        System.out.println("User logged in");
+        System.out.println("User email: " + this.userEmail);
+        System.out.println("User pass: " + this.userPassword);
+    }
+    
+    public void LogOut(ActionEvent e) throws IOException {
+        //go back to main screen
+        if (!Controller.screenHistory.isEmpty()) {
+            Controller.screenHistory.pop();
+            String previousScreen = Controller.screenHistory.peek(); 
+            if (previousScreen == "LogIn.fxml"){
+                Controller.screenHistory.pop();
+                Controller.storeCurrentScreen(previousScreen);
+            }
+            System.out.println("Attempting to go back to: " + previousScreen);
+            Parent root = FXMLLoader.load(getClass().getResource("/application/" + previousScreen));
+            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+            //remove details of the account
+            this.userEmail = null;
+            this.userPassword = null;
+
+            System.out.println("Navigated back to: " + previousScreen);
+        } else {
+            System.out.println("Screen history is empty. Cannot go back.");
+        }
+    }
+
+    public void ExitApp(ActionEvent e) {
+        Platform.exit();
+        System.exit(0);
+        System.out.println("Stopped");
+    }
+    
+
+}

@@ -52,6 +52,9 @@ public class ComposeController implements Initializable {
     @FXML
 	private Button sendButton;
 
+    @FXML
+    private Label warningLabel;
+
     //for the system
     private String userEmail;
     private String recipientEmail;
@@ -61,7 +64,7 @@ public class ComposeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        warningLabel.setVisible(false);
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
 
@@ -74,22 +77,33 @@ public class ComposeController implements Initializable {
     
     @FXML
     private void HandleSend(ActionEvent event) throws IOException {
- 
+        //get essential email components
         this.recipientEmail = recipientField.getText();
         this.emailSubject = subjectField.getText();
-        this.emailBody = bodyField.getText();
- 
-        //handle not null logics
-        if (this.recipientEmail == null || this.recipientEmail.isEmpty() || this.emailSubject == null || this.emailSubject.isEmpty() || this.emailBody == null || this.emailBody.isEmpty()) {
-            // Handle case where user didn't select both
-            //warningLabel.setVisible(true);
-            //warningLabel.setText("Email or password cannot be empty.");
+
+        String[] lines = bodyField.getText().split("\n");
+        StringBuilder formattedBody = new StringBuilder();
+        for (String line : lines) {
+            formattedBody.append(line).append("\r\n");
+        }
+        this.emailBody = formattedBody.toString();
+
+        System.out.println("Body field value: " + bodyField.getText());
+
+        // Handle case where user didn't fill in all fields
+        if (this.recipientEmail == null || this.recipientEmail.isEmpty() || 
+            this.emailSubject == null || this.emailSubject.isEmpty() || 
+            this.emailBody == null || this.emailBody.isEmpty()) {
+            warningLabel.setVisible(true);
+            warningLabel.setText("Please fill in all fields.");
             System.out.println("Please fill in all fields.");
             return; 
         }
         
         //After pressing Send
-        Courier newMail = new Courier(this.userEmail, this.recipientEmail, emailBody.toString(), emailSubject); //sender is automatically inputted by the system
+        warningLabel.setVisible(false);
+
+        Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
         if(newMail.MailSender(tempConnection))
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
         else System.out.println("Something went wrong"); 

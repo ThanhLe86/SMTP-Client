@@ -107,22 +107,26 @@ public class ComposeController implements Initializable {
             this.emailBody == null || this.emailBody.isEmpty()) {
             warningLabel.setVisible(true);
             warningLabel.setText("Please fill in all fields.");
+            warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
             System.out.println("Please fill in all fields.");
             return; 
         }
         
         //After pressing Send
+        warningLabel.setVisible(true);
         warningLabel.setText("Please wait...");
-        warningLabel.setTextFill(Color.color(255, 255, 0));
+        warningLabel.setTextFill(Color.color(1.0, 1.0, 0.0)); // label yellow
 
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
         if(newMail.MailSender(tempConnection)){
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
-            
             warningLabel.setText("Email sent successfully!");
-            warningLabel.setTextFill(Color.color(0, 255, 0));
+            warningLabel.setTextFill(Color.color(0.0, 1.0, 0.0)); // label green
+        } else{
+            warningLabel.setText("Something went wrong.");
+            warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
+            System.out.println("Something went wrong");
         }
-        else System.out.println("Something went wrong"); 
     }
 
 

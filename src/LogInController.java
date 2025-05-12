@@ -22,6 +22,7 @@ import javafx.scene.Scene;
  
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -66,20 +67,7 @@ public class LogInController implements Initializable{
         this.password = null;
          
     }
-      
-    public static void storeCurrentScreen(String currentScreen) {
-        //debug: LogIn.fxml will always in stack, to prevent it from being empty (when returning from Main.fxml)
-        //currently not working
-        // if(LogInController.screenHistory.isEmpty()){
-        //     screenHistory.push("LogIn.fxml");
-        // }
- 
-        screenHistory.push(currentScreen);
-        // System.out.println("Stored current screen: " + currentScreen);
-        // System.out.println("Current History: " + screenHistory);
-         
-    }
- 
+    
     @FXML
     private void HandleLogIn(ActionEvent event) throws IOException {
         warningLabel.setVisible(false);
@@ -104,6 +92,7 @@ public class LogInController implements Initializable{
             tempConnection.Quit();
 
             warningLabel.setVisible(true);
+            warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
             warningLabel.setText("Authenication failed. Check your email and password. Remember to use the app password, NOT your email password!");
             return;
         }
@@ -115,9 +104,10 @@ public class LogInController implements Initializable{
  
     public void LoadMainScreen(ActionEvent event) {
         try {
-            currentScreen = "Main.fxml";
-            LogInController.storeCurrentScreen(currentScreen);
-             
+            warningLabel.setVisible(true);
+            warningLabel.setText("Please wait...");
+            warningLabel.setTextFill(Color.color(1.0, 1.0, 0.0)); // label yellow
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml")); 
             Parent root = loader.load();
  

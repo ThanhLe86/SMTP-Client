@@ -70,9 +70,9 @@ public class LogInController implements Initializable{
     public static void storeCurrentScreen(String currentScreen) {
         //debug: LogIn.fxml will always in stack, to prevent it from being empty (when returning from Main.fxml)
         //currently not working
-        if(LogInController.screenHistory.isEmpty()){
-            screenHistory.push("LogIn.fxml");
-        }
+        // if(LogInController.screenHistory.isEmpty()){
+        //     screenHistory.push("LogIn.fxml");
+        // }
  
         screenHistory.push(currentScreen);
         // System.out.println("Stored current screen: " + currentScreen);

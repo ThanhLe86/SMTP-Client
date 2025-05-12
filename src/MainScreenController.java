@@ -100,32 +100,50 @@ public class MainScreenController implements Initializable {
         System.out.println("User pass: " + this.userPassword);
     }
     
-    public void LogOut(ActionEvent e) throws IOException {
-        //go back to main screen
-        if (!LogInController.screenHistory.isEmpty()) {
-            LogInController.screenHistory.pop();
-            String previousScreen = LogInController.screenHistory.peek(); 
-            if (previousScreen == "LogIn.fxml"){
-                LogInController.screenHistory.pop();
-                LogInController.storeCurrentScreen(previousScreen);
-            }
-            System.out.println("Attempting to go back to: " + previousScreen);
-            Parent root = FXMLLoader.load(getClass().getResource("/application/" + previousScreen));
-            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+    // public void LogOut(ActionEvent e) throws IOException {
+    //     //go back to main screen
+    //     if (!LogInController.screenHistory.isEmpty()) {
+    //         LogInController.screenHistory.pop();
+    //         String previousScreen = LogInController.screenHistory.peek(); 
+    //         if (previousScreen == "LogIn.fxml"){
+    //             LogInController.screenHistory.pop();
+    //             LogInController.storeCurrentScreen(previousScreen);
+    //         }
+    //         System.out.println("Attempting to go back to: " + previousScreen);
+    //         Parent root = FXMLLoader.load(getClass().getResource("/application/" + previousScreen));
+    //         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    //         Scene scene = new Scene(root);
+    //         stage.setScene(scene);
+    //         stage.show();
 
-            //remove details of the account
-            this.userEmail = null;
-            this.userPassword = null;
+    //         //remove details of the account
+    //         this.userEmail = null;
+    //         this.userPassword = null;
 
-            System.out.println("Navigated back to: " + previousScreen);
-        } else {
-            System.out.println("Screen history is empty. Cannot go back.");
-        }
+    //         System.out.println("Navigated back to: " + previousScreen);
+    //     } else {
+    //         System.out.println("Screen history is empty. Cannot go back.");
+    //     }
+    // }
+
+    public void LogOutNow(ActionEvent e) throws IOException {
+        // Load the login screen directly
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
+        Parent root = loader.load();
+    
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1280, 720);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    
+        // Clear user data
+        this.userEmail = null;
+        this.userPassword = null;
+    
+        System.out.println("Logged out. Returned to LogIn.fxml.");
     }
-
+    
     public void ExitApp(ActionEvent e) {
         Platform.exit();
         System.exit(0);

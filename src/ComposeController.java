@@ -86,6 +86,9 @@ public class ComposeController implements Initializable {
         if(newMail.MailSender(tempConnection))
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
         else System.out.println("Something went wrong"); 
+
+        // close this compose window after sending
+        recipientField.getScene().getWindow().hide();
     }
 
 

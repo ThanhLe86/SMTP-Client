@@ -135,9 +135,6 @@ public class MainScreenController implements Initializable {
 
     @FXML 
     private void HandleCompose(ActionEvent event) throws IOException {
-        currentScreen = "Compose.fxml";
-        LogInController.storeCurrentScreen(currentScreen);
-
         //go to compose screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Compose.fxml"));
         Parent root = loader.load();
@@ -154,7 +151,7 @@ public class MainScreenController implements Initializable {
         stage.setAlwaysOnTop(true);
         stage.setX(scene.getWindow().getX() + scene.getWidth() - 420); // 400 width + margin
         stage.setY(scene.getWindow().getY() + scene.getHeight() - 340);
-        
+
         stage.show();
 
         System.out.println("Compose.fxml Opened");

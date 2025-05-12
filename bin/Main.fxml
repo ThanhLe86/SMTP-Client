@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainScreenController">
    <children>
-      <Button fx:id="composeButton" layoutX="144.0" layoutY="183.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Compose" />
+      <Button fx:id="composeButton" layoutX="144.0" layoutY="183.0" mnemonicParsing="false" onAction="#HandleCompose" prefHeight="36.0" prefWidth="100.0" text="Compose" />
       <Button fx:id="deleteButton" layoutX="144.0" layoutY="244.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Delete" />
       <Button fx:id="bookmarkedButton" layoutX="144.0" layoutY="311.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Bookmarked" />
       <TableView fx:id="emailTableView" layoutX="441.0" layoutY="86.0" prefHeight="583.0" prefWidth="494.0">

@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LogInController">
    <children>
       <Button fx:id="logInButton" layoutX="474.0" layoutY="455.0" mnemonicParsing="false" onAction="#HandleLogIn" prefHeight="35.0" prefWidth="137.0" text="Log In" />
-      <PasswordField fx:id="userPassword" layoutX="612.0" layoutY="380.0" />
-      <TextField fx:id="userEmail" layoutX="613.0" layoutY="308.0" promptText="abc@gmail.com" />
+      <PasswordField fx:id="userPassword" layoutX="607.0" layoutY="380.0" prefHeight="26.0" prefWidth="303.0" />
+      <TextField fx:id="userEmail" layoutX="608.0" layoutY="308.0" prefHeight="26.0" prefWidth="303.0" promptText="abc@gmail.com" />
       <Label layoutX="368.0" layoutY="379.0" prefHeight="26.0" prefWidth="174.0" text="Enter your password:" />
       <Label layoutX="368.0" layoutY="307.0" prefHeight="26.0" prefWidth="174.0" text="Enter your email:" />
       <Label layoutX="387.0" layoutY="163.0" prefHeight="80.0" prefWidth="447.0" text="Welcome to System" textAlignment="CENTER">
@@ -19,7 +19,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="warningLabel" layoutX="359.0" layoutY="547.0" prefHeight="26.0" prefWidth="365.0" text="Label" textFill="RED" />
+      <Label fx:id="warningLabel" layoutX="160.0" layoutY="535.0" prefHeight="26.0" prefWidth="763.0" text="Label" textFill="RED" />
       <Button fx:id="exitButton" layoutX="32.0" layoutY="20.0" mnemonicParsing="false" onAction="#ExitApp" prefHeight="35.0" prefWidth="114.0" text="Exit" />
    </children>
 </AnchorPane>

@@ -62,7 +62,8 @@ public class Main extends Application {
 	}
 
 }
-/* 
+
+/* sample login and send code structure
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner keyboard = new Scanner(System.in);

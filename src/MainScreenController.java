@@ -40,6 +40,9 @@ import javafx.scene.input.MouseEvent;   //clicks on emails
 
 public class MainScreenController implements Initializable {
 
+    public static String currentScreen;
+    //private String cssString = this.getClass().getResource("/application/application.css").toExternalForm();
+
     //for .fxml elements
     @FXML
     private Button composeButton;
@@ -71,7 +74,8 @@ public class MainScreenController implements Initializable {
     //for the system
     private String userEmail;
     private String userPassword;
-    
+    private SMTP_Connection tempConnection;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	composeButton.setVisible(true);
@@ -87,9 +91,10 @@ public class MainScreenController implements Initializable {
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
 
-    public void initializeData(String email, String password) {
+    public void initializeData(String email, String password, SMTP_Connection connection) {
         this.userEmail = email;
         this.userPassword = password;
+        this.tempConnection = connection;
 
         System.out.println("User logged in");
         System.out.println("User email: " + this.userEmail);
@@ -98,12 +103,12 @@ public class MainScreenController implements Initializable {
     
     public void LogOut(ActionEvent e) throws IOException {
         //go back to main screen
-        if (!Controller.screenHistory.isEmpty()) {
-            Controller.screenHistory.pop();
-            String previousScreen = Controller.screenHistory.peek(); 
+        if (!LogInController.screenHistory.isEmpty()) {
+            LogInController.screenHistory.pop();
+            String previousScreen = LogInController.screenHistory.peek(); 
             if (previousScreen == "LogIn.fxml"){
-                Controller.screenHistory.pop();
-                Controller.storeCurrentScreen(previousScreen);
+                LogInController.screenHistory.pop();
+                LogInController.storeCurrentScreen(previousScreen);
             }
             System.out.println("Attempting to go back to: " + previousScreen);
             Parent root = FXMLLoader.load(getClass().getResource("/application/" + previousScreen));
@@ -126,6 +131,33 @@ public class MainScreenController implements Initializable {
         Platform.exit();
         System.exit(0);
         System.out.println("Stopped");
+    }
+
+    @FXML 
+    private void HandleCompose(ActionEvent event) throws IOException {
+        currentScreen = "Compose.fxml";
+        LogInController.storeCurrentScreen(currentScreen);
+
+        //go to compose screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Compose.fxml"));
+        Parent root = loader.load();
+
+        ComposeController composeController = loader.getController();
+        composeController.initializeData(this.userEmail, this.tempConnection); // Pass email and password to the controller
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root,1280,720);
+        stage.setScene(scene);
+        stage.setResizable(false);
+
+        // set always on top and resize compose window
+        stage.setAlwaysOnTop(true);
+        stage.setX(scene.getWindow().getX() + scene.getWidth() - 420); // 400 width + margin
+        stage.setY(scene.getWindow().getY() + scene.getHeight() - 340);
+        
+        stage.show();
+
+        System.out.println("Compose.fxml Opened");
     }
     
 

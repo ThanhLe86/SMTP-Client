@@ -1,10 +1,6 @@
 /*
  * Control LogIn.fxml, log in interface of the program
- * 
- * TO DO:
- * - implement logics for account in HandleLogIn
  */
-
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +29,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
  
  
-public class Controller implements Initializable{
+public class LogInController implements Initializable{
       
     public static String currentScreen;
     //private String cssString = this.getClass().getResource("/application/application.css").toExternalForm();
@@ -44,7 +40,8 @@ public class Controller implements Initializable{
     //for system
     private String email;
     private String password;
- 
+    private SMTP_Connection tempConnection;
+
     //for .fxml elements
     @FXML
     private TextField userEmail;
@@ -73,7 +70,7 @@ public class Controller implements Initializable{
     public static void storeCurrentScreen(String currentScreen) {
         //debug: LogIn.fxml will always in stack, to prevent it from being empty (when returning from Main.fxml)
         //currently not working
-        if(Controller.screenHistory.isEmpty()){
+        if(LogInController.screenHistory.isEmpty()){
             screenHistory.push("LogIn.fxml");
         }
  
@@ -90,7 +87,7 @@ public class Controller implements Initializable{
         this.email = userEmail.getText();
         this.password = userPassword.getText();
  
-        //default logics is not null
+        //handle not null logics
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             // Handle case where user didn't select both
             warningLabel.setVisible(true);
@@ -100,19 +97,17 @@ public class Controller implements Initializable{
         }
 
         //create SMTP connection and check if it's work, otherwise return
-        SMTP_Connection tempConnection = new SMTP_Connection("smtp.gmail.com", 587); //includes connecting and attempting comm
+        tempConnection = new SMTP_Connection("smtp.gmail.com", 587); //includes connecting and attempting comm
         AuthenticationManager tempAuthenticator = new AuthenticationManager(this.email, this.password);
 
         if(!tempAuthenticator.Authenticate(tempConnection)){
             tempConnection.Quit();
 
             warningLabel.setVisible(true);
-            warningLabel.setText("Authenication failed. Please check your email and password.");
+            warningLabel.setText("Authenication failed. Check your email and password. Remember to use the app password, NOT your email password!");
             return;
         }
 
-
-        
         System.out.println("Email: " + email);
         System.out.println("Password: " + password);
         LoadMainScreen(event);
@@ -121,16 +116,16 @@ public class Controller implements Initializable{
     public void LoadMainScreen(ActionEvent event) {
         try {
             currentScreen = "Main.fxml";
-            Controller.storeCurrentScreen(currentScreen);
+            LogInController.storeCurrentScreen(currentScreen);
              
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml")); 
             Parent root = loader.load();
  
             MainScreenController mainScreenController = loader.getController();
-            mainScreenController.initializeData(this.email, this.password); // Pass email and password to the controller
+            mainScreenController.initializeData(this.email, this.password, this.tempConnection); // Pass email, password and connection to the controller
  
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1280,720);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

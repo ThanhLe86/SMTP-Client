@@ -72,7 +72,7 @@ public class Main {
         String emailRecipient;
 
         SMTP_Connection tempConnection = new SMTP_Connection("smtp.gmail.com", 587); //includes connecting and attempting comm
-        AuthenticationManager tempAuthenticator = new AuthenticationManager("", ""); // Need app password to work
+        AuthenticationManager tempAuthenticator = new AuthenticationManager("lejames726yahhh@gmail.com", "wjcn jcio hpwe spwx "); // Need app password to work
 
         if(tempAuthenticator.Authenticate(tempConnection)){ // if authentication succeeds
 
@@ -88,9 +88,10 @@ public class Main {
                 if(line.equals(".")) break;
                 emailContent.append(line + "\r\n");
             }
+            keyboard.close();
 
             //After pressing Send
-            Courier newMail = new Courier("", emailRecipient, emailContent.toString(), emailSubject); //sender is automatically inputted by the system
+            Courier newMail = new Courier("lejames726yahhh@gmail.com", emailRecipient, emailContent.toString(), emailSubject); //sender is automatically inputted by the system
             if(newMail.MailSender(tempConnection))
                 System.out.println("Send successful, check destination inbox! Maybe in Spam");
             else System.out.println("Something went wrong"); 

@@ -80,7 +80,14 @@ public class ComposeController implements Initializable {
         this.emailBody = bodyField.getText();
  
         //handle not null logics
-
+        if (this.recipientEmail == null || this.recipientEmail.isEmpty() || this.emailSubject == null || this.emailSubject.isEmpty() || this.emailBody == null || this.emailBody.isEmpty()) {
+            // Handle case where user didn't select both
+            //warningLabel.setVisible(true);
+            //warningLabel.setText("Email or password cannot be empty.");
+            System.out.println("Please fill in all fields.");
+            return; 
+        }
+        
         //After pressing Send
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, emailBody.toString(), emailSubject); //sender is automatically inputted by the system
         if(newMail.MailSender(tempConnection))

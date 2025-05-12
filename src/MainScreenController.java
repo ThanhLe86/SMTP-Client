@@ -147,10 +147,8 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
 
-        // set always on top and resize compose window
+        // set always on top 
         stage.setAlwaysOnTop(true);
-        stage.setX(scene.getWindow().getX() + scene.getWidth() - 420); // 400 width + margin
-        stage.setY(scene.getWindow().getY() + scene.getHeight() - 340);
 
         stage.show();
 

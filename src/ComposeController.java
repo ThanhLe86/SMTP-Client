@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -55,6 +56,12 @@ public class ComposeController implements Initializable {
     @FXML
     private Label warningLabel;
 
+    @FXML
+	private Button cancelButton;
+
+    @FXML
+	private Button exitButton;
+
     //for the system
     private String userEmail;
     private String recipientEmail;
@@ -65,6 +72,10 @@ public class ComposeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         warningLabel.setVisible(false);
+        cancelButton.setVisible(true);
+        sendButton.setVisible(true);
+        exitButton.setVisible(true);
+
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
 
@@ -101,15 +112,17 @@ public class ComposeController implements Initializable {
         }
         
         //After pressing Send
-        warningLabel.setVisible(false);
+        warningLabel.setText("Please wait...");
+        warningLabel.setTextFill(Color.color(255, 255, 0));
 
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
-        if(newMail.MailSender(tempConnection))
+        if(newMail.MailSender(tempConnection)){
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
+            
+            warningLabel.setText("Email sent successfully!");
+            warningLabel.setTextFill(Color.color(0, 255, 0));
+        }
         else System.out.println("Something went wrong"); 
-
-        // close this compose window after sending
-        recipientField.getScene().getWindow().hide();
     }
 
 
@@ -119,5 +132,18 @@ public class ComposeController implements Initializable {
         System.out.println("Stopped");
     }
     
+    @FXML
+    private void HandleCancel(ActionEvent event) throws IOException {
+        //go back to main screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        Parent root = loader.load();
 
+        MainScreenController mainController = loader.getController();
+        mainController.initializeData(this.userEmail, this.tempConnection); // use "" for password if not needed
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.setResizable(false);
+        stage.show();
+    }
 }

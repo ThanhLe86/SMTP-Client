@@ -91,9 +91,8 @@ public class MainScreenController implements Initializable {
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
 
-    public void initializeData(String email, String password, SMTP_Connection connection) {
+    public void initializeData(String email,SMTP_Connection connection) {
         this.userEmail = email;
-        this.userPassword = password;
         this.tempConnection = connection;
 
         System.out.println("User logged in");

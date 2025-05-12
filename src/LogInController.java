@@ -122,7 +122,7 @@ public class LogInController implements Initializable{
             Parent root = loader.load();
  
             MainScreenController mainScreenController = loader.getController();
-            mainScreenController.initializeData(this.email, this.password, this.tempConnection); // Pass email, password and connection to the controller
+            mainScreenController.initializeData(this.email, this.tempConnection); // Pass email, password and connection to the controller
  
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root,1280,720);

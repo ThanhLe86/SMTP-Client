@@ -13,7 +13,9 @@
       <Label layoutX="132.0" layoutY="63.0" prefHeight="26.0" prefWidth="166.0" text="Receipent:" />
       <Label layoutX="132.0" layoutY="116.0" prefHeight="26.0" prefWidth="166.0" text="Subject:" />
       <TextArea fx:id="bodyField" layoutX="132.0" layoutY="159.0" prefHeight="486.0" prefWidth="819.0" />
-      <Button fx:id="sendButton" layoutX="1040.0" layoutY="591.0" mnemonicParsing="false" onAction="#HandleSend" prefHeight="47.0" prefWidth="135.0" text="Send" />
+      <Button fx:id="sendButton" layoutX="1047.0" layoutY="598.0" mnemonicParsing="false" onAction="#HandleSend" prefHeight="40.0" prefWidth="121.0" text="Send" />
       <Label fx:id="warningLabel" layoutX="965.0" layoutY="174.0" prefHeight="26.0" prefWidth="286.0" text="Label" textFill="RED" />
+      <Button fx:id="exitButton" layoutX="1047.0" layoutY="63.0" mnemonicParsing="false" onAction="#ExitApp" prefHeight="26.0" prefWidth="86.0" text="Exit" />
+      <Button fx:id="cancelButton" layoutX="1047.0" layoutY="116.0" mnemonicParsing="false" onAction="#HandleCancel" prefHeight="26.0" prefWidth="86.0" text="Cancel" />
    </children>
 </AnchorPane>

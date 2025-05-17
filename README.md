@@ -66,6 +66,7 @@ Added a functionality that helps switching between light mode and dark mode.
 - The ThemeManager.java will manage the switch between the modes.
 - toggleTheme() will switch the Theme state with boolean operation
 - applyTheme() will call the respective .css file with scene.getStyleSheets()
+- Use ThemeManager.applyTheme() to set up current state (light/dark mode) correctly (instead of default light mode) after creating scene in Handle...()
 
 - Current setup:
     - Light: white AnchorPane, white Button with black text, and Label with black text.

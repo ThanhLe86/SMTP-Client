@@ -62,6 +62,9 @@ public class ComposeController implements Initializable {
     @FXML
 	private Button exitButton;
 
+    @FXML
+    private Button DarkModeButton;
+
     //for the system
     private String userEmail;
     private String recipientEmail;
@@ -146,8 +149,19 @@ public class ComposeController implements Initializable {
         mainController.initializeData(this.userEmail, this.tempConnection); // use "" for password if not needed
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root, 1280, 720));
+        Scene scene = new Scene(root,1280,720);
+
+        ThemeManager.applyTheme(scene);
+
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
+
+    @FXML
+    private void HandleDarkMode(ActionEvent event) {
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        ThemeManager.toggleTheme(currentScene);
+    }
+
 }

@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: white;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: #ccc;
+}
+
+.label {
+    -fx-text-fill: black;
+}

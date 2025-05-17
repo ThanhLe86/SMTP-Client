@@ -17,5 +17,6 @@
       <Label fx:id="warningLabel" layoutX="965.0" layoutY="174.0" prefHeight="26.0" prefWidth="286.0" text="Label" textFill="RED" />
       <Button fx:id="exitButton" layoutX="1047.0" layoutY="63.0" mnemonicParsing="false" onAction="#ExitApp" prefHeight="26.0" prefWidth="86.0" text="Exit" />
       <Button fx:id="cancelButton" layoutX="1047.0" layoutY="116.0" mnemonicParsing="false" onAction="#HandleCancel" prefHeight="26.0" prefWidth="86.0" text="Cancel" />
+      <Button fx:id="DarkModeButton" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#HandleDarkMode" prefHeight="35.0" prefWidth="114.0" text="Dark Mode" />
    </children>
 </AnchorPane>

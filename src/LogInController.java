@@ -58,6 +58,9 @@ public class LogInController implements Initializable{
  
     @FXML
     private Button exitButton;
+
+    @FXML
+    private Button DarkModeButton;
  
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,6 +119,9 @@ public class LogInController implements Initializable{
  
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root,1280,720);
+
+            ThemeManager.applyTheme(scene);
+
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
@@ -133,7 +139,13 @@ public class LogInController implements Initializable{
         System.exit(0);
         System.out.println("Stopped");
     }
-     
+    
+    @FXML
+    private void HandleDarkMode(ActionEvent event) {
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        ThemeManager.toggleTheme(currentScene);
+    }
+
   
      
 }

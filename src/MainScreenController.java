@@ -71,6 +71,9 @@ public class MainScreenController implements Initializable {
     @FXML
 	private Button exitButton;
 
+    @FXML
+    private Button DarkModeButton;
+
     //for the system
     private String userEmail;
     private String userPassword;
@@ -133,6 +136,9 @@ public class MainScreenController implements Initializable {
     
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1280, 720);
+
+        ThemeManager.applyTheme(scene);
+        
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -161,6 +167,9 @@ public class MainScreenController implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,720);
+
+        ThemeManager.applyTheme(scene);
+
         stage.setScene(scene);
         stage.setResizable(false);
 
@@ -172,5 +181,11 @@ public class MainScreenController implements Initializable {
         System.out.println("Compose.fxml Opened");
     }
     
+    @FXML
+    private void HandleDarkMode(ActionEvent event) {
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        ThemeManager.toggleTheme(currentScene);
+    }
+
 
 }

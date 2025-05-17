@@ -19,5 +19,6 @@
       </TableView>
       <Button fx:id="logOutButton" layoutX="1101.0" layoutY="14.0" mnemonicParsing="false" onAction="#LogOutNow" prefHeight="26.0" prefWidth="88.0" text="Log out" />
       <Button fx:id="exitButton" layoutX="1101.0" layoutY="51.0" mnemonicParsing="false" onAction="#ExitApp" prefHeight="20.0" prefWidth="88.0" text="Exit" />
+      <Button fx:id="DarkModeButton" layoutX="42.0" layoutY="80.0" mnemonicParsing="false" onAction="#HandleDarkMode" prefHeight="35.0" prefWidth="114.0" text="Dark Mode" />
    </children>
 </AnchorPane>

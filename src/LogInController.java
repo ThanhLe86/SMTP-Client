@@ -31,13 +31,6 @@ import javafx.scene.control.Button;
  
  
 public class LogInController implements Initializable{
-      
-    public static String currentScreen;
-    //private String cssString = this.getClass().getResource("/application/application.css").toExternalForm();
- 
-    // Stack to store the previous pages
-    public static Stack<String> screenHistory = new Stack<>();
-     
     //for system
     private String email;
     private String password;

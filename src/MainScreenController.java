@@ -1,8 +1,5 @@
 /*
  * Control Main.fxml, main interaction of the app
- * 
- * TO DO:
- * - implement a class to store emails so that we can display email in the TableView
  */
 import java.awt.Event;
 import java.awt.MediaTracker;
@@ -18,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
  
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,10 +37,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;   //clicks on emails
 
 public class MainScreenController implements Initializable {
-
-    public static String currentScreen;
-    //private String cssString = this.getClass().getResource("/application/application.css").toExternalForm();
-
     //for .fxml elements
     @FXML
     private Button composeButton;
@@ -57,16 +51,19 @@ public class MainScreenController implements Initializable {
     private Button logOutButton;
 
     @FXML
-    private TableView<String> emailTableView;
+    private TableView<Email> emailTableView;
 
     @FXML
-    private TableColumn<String, String> dateColumn;
+    private TableColumn<Email, String> dateColumn;
 
     @FXML
-    private TableColumn<String, String> recipientColumn;
+    private TableColumn<Email, String> recipientColumn;
 
     @FXML
-    private TableColumn<String, String> headerColumn;
+    private TableColumn<Email, String> subjectColumn;
+
+    @FXML
+    private TableColumn<Email, String> bodyColumn;
     
     @FXML
 	private Button exitButton;
@@ -86,10 +83,21 @@ public class MainScreenController implements Initializable {
         bookmarkedButton.setVisible(true);
 
         // Link each column to the Email class properties
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        recipientColumn.setCellValueFactory(new PropertyValueFactory<>("recipient"));
-        headerColumn.setCellValueFactory(new PropertyValueFactory<>("header"));
-        emailTableView.setPlaceholder(new Label("No emails yet"));
+        // dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        // recipientColumn.setCellValueFactory(new PropertyValueFactory<>("recipient"));
+        // headerColumn.setCellValueFactory(new PropertyValueFactory<>("header"));
+        // emailTableView.setPlaceholder(new Label("No emails yet"));
+
+        dateColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+        recipientColumn.setCellValueFactory(cellData -> cellData.getValue().recipientProperty());
+        subjectColumn.setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
+        bodyColumn.setCellValueFactory(cellData -> {
+            String rawBody = cellData.getValue().getBody();
+            String singleLine = rawBody.replaceAll("\\s*[\r\n]+\\s*", " ").trim();
+            return new SimpleStringProperty(singleLine);
+        });
+
+        emailTableView.setPlaceholder(new Label("No emails yet!"));
 
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
@@ -101,6 +109,10 @@ public class MainScreenController implements Initializable {
         System.out.println("User logged in");
         System.out.println("User email: " + this.userEmail);
         System.out.println("User pass: " + this.userPassword);
+
+        // Load and display emails
+        List<Email> emails = Email.readEmails(this.userEmail);
+        emailTableView.getItems().setAll(emails);
     }
     
     // public void LogOut(ActionEvent e) throws IOException {

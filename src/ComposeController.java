@@ -39,7 +39,6 @@ import javafx.scene.input.MouseEvent;   //clicks on emails
 import javafx.scene.control.TextArea;   //email body
 
 public class ComposeController implements Initializable {
-
     //for .fxml elements
     @FXML
     private TextField recipientField;
@@ -89,19 +88,25 @@ public class ComposeController implements Initializable {
         System.out.println("User email: " + this.userEmail);
     }
     
+    private String formattedBody(String body) {
+        String[] lines = body.split("\n");
+        StringBuilder formattedBody = new StringBuilder();
+        for (String line : lines) {
+            formattedBody.append(line).append("\r\n");
+        }
+        return formattedBody.toString();
+    }
+
     @FXML
     private void HandleSend(ActionEvent event) throws IOException {
         //get essential email components
         this.recipientEmail = recipientField.getText();
         this.emailSubject = subjectField.getText();
+        this.emailBody = formattedBody(bodyField.getText());
 
-        String[] lines = bodyField.getText().split("\n");
-        StringBuilder formattedBody = new StringBuilder();
-        for (String line : lines) {
-            formattedBody.append(line).append("\r\n");
-        }
-        this.emailBody = formattedBody.toString();
+        Email.logEmail(this.userEmail, this.recipientEmail, this.emailSubject, bodyField.getText());
 
+        //debug to test if the body is correctly formatted
         System.out.println("Body field value: " + bodyField.getText());
 
         // Handle case where user didn't fill in all fields
@@ -123,8 +128,12 @@ public class ComposeController implements Initializable {
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
         if(newMail.MailSender(tempConnection)){
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
+
             warningLabel.setText("Email sent successfully!");
             warningLabel.setTextFill(Color.color(0.0, 1.0, 0.0)); // label green
+            sendButton.setVisible(false);
+            cancelButton.setText("Return");
+
         } else{
             warningLabel.setText("Something went wrong.");
             warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red

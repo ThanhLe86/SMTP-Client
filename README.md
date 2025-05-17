@@ -72,6 +72,15 @@ Added a functionality that helps switching between light mode and dark mode.
     - Light: white AnchorPane, white Button with black text, and Label with black text.
     - Dark: black AnchorPane, black Button with white text and Label with white text.
 
+### Update 17.05.2025
+Added a functionality that helps storing sent emails from this client (local save/database).
+- Instead of String, we use StringProperty, which makes String observable and enable automatic update in UI for JavaFX programs.
+- Every emails have 5 attributes: emailTime, emailSender, emailRecipient, emailSubject, emailBody
+- Call Email.logEmail() to write the currently sent email (in Compose.fxml) into the database (database.csv)
+- Call Email.readEmails(this.userEmail) to retrieve a List of sent emails from this.userEmail to show it in emailTableView in Main.fxml
+- emailTableView is now usable. By retrieving a List of emails, we now have the data to set value of the cellData into columns
+- DEBUG: see the top of Email.java
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 

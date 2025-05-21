@@ -16,6 +16,8 @@ import java.util.Stack;
  
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,12 +27,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -71,15 +75,35 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField searchBarField;
 
+    @FXML 
+    private CheckBox recipientCheckBox;   
+
+    @FXML 
+    private CheckBox subjectCheckBox;
+
+    @FXML 
+    private CheckBox bodyCheckBox;
+
+    @FXML
+	private Button advanceSearchButton;
+
+    
+
     //for the system
     private String userEmail;
     private String userPassword;
     private SMTP_Connection tempConnection;
+    private ObservableList<Email> emailList;        //observable list of emails as it can listen to changes
+    private static boolean advanceSearch = false;    //toggle for advanced search
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	composeButton.setVisible(true);
         bookmarkedButton.setVisible(true);
+
+        recipientCheckBox.setVisible(false);
+        subjectCheckBox.setVisible(false);
+        bodyCheckBox.setVisible(false);
 
         // Link each column to the Email class properties
         // dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -106,8 +130,11 @@ public class MainScreenController implements Initializable {
         System.out.println("User pass: " + this.userPassword);
 
         // Load and display emails
-        List<Email> emails = Email.readEmails(this.userEmail);
-        emailTableView.getItems().setAll(emails);
+        // List<Email> emails = Email.readEmails(this.userEmail);
+        // emailTableView.getItems().setAll(emails);
+
+        this.emailList = FXCollections.observableArrayList(Email.readEmails(this.userEmail));
+        emailTableView.setItems(this.emailList);
     }
     
     // public void LogOut(ActionEvent e) throws IOException {
@@ -194,5 +221,38 @@ public class MainScreenController implements Initializable {
         ThemeManager.toggleTheme(currentScene);
     }
 
+    @FXML
+    private void HandleAdvanceSearch(ActionEvent event) {
+        advanceSearch = !advanceSearch;
+        if (advanceSearch){
+            recipientCheckBox.setVisible(true);
+            subjectCheckBox.setVisible(true);
+            bodyCheckBox.setVisible(true);
+        } else {
+            recipientCheckBox.setVisible(false);
+            subjectCheckBox.setVisible(false);
+            bodyCheckBox.setVisible(false);
+        }
+    }
 
+    @FXML
+    private void handleSearchKey(KeyEvent event) {
+        if (event.getCode() != KeyCode.ENTER) return;
+        
+        String query = searchBarField.getText().toLowerCase().trim();
+        //perform query with no advance search (all 3 options)
+        if (!advanceSearch) {
+            ObservableList<Email> results = SearchEngine.searchEmails(emailList, query, true, true, true);
+            emailTableView.setItems(results);
+            return;
+        }
+
+        //perform query with advance search
+        boolean searchSubject = subjectCheckBox.isSelected();
+        boolean searchBody = bodyCheckBox.isSelected();
+        boolean searchRecipient = recipientCheckBox.isSelected();
+        
+        ObservableList<Email> results = SearchEngine.searchEmails(emailList, query, searchSubject, searchBody, searchRecipient);
+        emailTableView.setItems(results);
+    }
 }

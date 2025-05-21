@@ -104,8 +104,6 @@ public class ComposeController implements Initializable {
         this.emailSubject = subjectField.getText();
         this.emailBody = formattedBody(bodyField.getText());
 
-        Email.logEmail(this.userEmail, this.recipientEmail, this.emailSubject, bodyField.getText());
-
         //debug to test if the body is correctly formatted
         System.out.println("Body field value: " + bodyField.getText());
 
@@ -134,13 +132,14 @@ public class ComposeController implements Initializable {
             sendButton.setVisible(false);
             cancelButton.setText("Return");
 
+            Email.logEmail(this.userEmail, this.recipientEmail, this.emailSubject, bodyField.getText());
+
         } else{
             warningLabel.setText("Something went wrong.");
             warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
             System.out.println("Something went wrong");
         }
     }
-
 
     public void ExitApp(ActionEvent e) {
         Platform.exit();

@@ -87,6 +87,15 @@ Major changes in storing emails.
 - Instead, a new folder /database is made to store email bodies. 
 - database.csv is also moved to /database.
 
+### Update 22.05.2025
+Added a simple search feature for local emails
+- The top bar in Main.fxml is the search bar.
+- Currently, we have 3 options: search in Recipient, Subbject, Body
+- Use Check Box for each options.
+- Add AdvanceSearch Toggle for UI simplicity (only show the check boxes in advance search mode)
+- Simply take the boolean value of each check boxes and use it as parameters for searchEmails()
+- To be added: search within date
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 

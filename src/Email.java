@@ -28,7 +28,7 @@ public class Email {
 
     //Database path
     private static final String FILE_PATH = "src/database.csv";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     //constructor
     public Email(String time, String sender, String recipient, String subject, String body) {

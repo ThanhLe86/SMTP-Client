@@ -84,7 +84,7 @@ Added a functionality that helps storing sent emails from this client (local sav
 ### Update 21.05.2025
 Major changes in storing emails.
 - As parsing the .csv file is increasingly difficult as the number of lines in the email body increases, we are no longer storing the body in the .csv file.
-- Instead, a new folder /database is made to store email bodies. 
+- Instead, a new folder /database is made to store email bodies in .txt files. Their names is in the format: DDMMYYYY_HHMMSS
 - database.csv is also moved to /database.
 
 ### Update 22.05.2025

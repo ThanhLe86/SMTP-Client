@@ -42,9 +42,6 @@ public class MainScreenController implements Initializable {
     private Button composeButton;
 
     @FXML
-    private Button deleteButton;
-
-    @FXML
     private Button bookmarkedButton;
 
     @FXML
@@ -71,6 +68,9 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button DarkModeButton;
 
+    @FXML
+    private TextField searchBarField;
+
     //for the system
     private String userEmail;
     private String userPassword;
@@ -79,7 +79,6 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	composeButton.setVisible(true);
-        deleteButton.setVisible(true);
         bookmarkedButton.setVisible(true);
 
         // Link each column to the Email class properties

@@ -81,6 +81,12 @@ Added a functionality that helps storing sent emails from this client (local sav
 - emailTableView is now usable. By retrieving a List of emails, we now have the data to set value of the cellData into columns
 - DEBUG: see the top of Email.java
 
+### Update 21.05.2025
+Major changes in storing emails.
+- As parsing the .csv file is increasingly difficult as the number of lines in the email body increases, we are no longer storing the body in the .csv file.
+- Instead, a new folder /database is made to store email bodies. 
+- database.csv is also moved to /database.
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 

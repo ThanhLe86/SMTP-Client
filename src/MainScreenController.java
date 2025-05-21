@@ -91,11 +91,7 @@ public class MainScreenController implements Initializable {
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
         recipientColumn.setCellValueFactory(cellData -> cellData.getValue().recipientProperty());
         subjectColumn.setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
-        bodyColumn.setCellValueFactory(cellData -> {
-            String rawBody = cellData.getValue().getBody();
-            String singleLine = rawBody.replaceAll("\\s*[\r\n]+\\s*", " ").trim();
-            return new SimpleStringProperty(singleLine);
-        });
+        bodyColumn.setCellValueFactory(cellData -> cellData.getValue().bodyProperty());
 
         emailTableView.setPlaceholder(new Label("No emails yet!"));
 

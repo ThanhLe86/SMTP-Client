@@ -104,9 +104,6 @@ public class ComposeController implements Initializable {
         this.emailSubject = subjectField.getText();
         this.emailBody = formattedBody(bodyField.getText());
 
-        //debug to test if the body is correctly formatted
-        System.out.println("Body field value: " + bodyField.getText());
-
         // Handle case where user didn't fill in all fields
         if (this.recipientEmail == null || this.recipientEmail.isEmpty() || 
             this.emailSubject == null || this.emailSubject.isEmpty() || 

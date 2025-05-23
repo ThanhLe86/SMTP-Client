@@ -92,9 +92,6 @@ public class LogInController implements Initializable{
             warningLabel.setText("Authenication failed. Check your email and password. Remember to use the app password, NOT your email password!");
             return;
         }
-
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
         LoadMainScreen(event);
     }
  

@@ -9,8 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainScreenController">
    <children>
-      <Button fx:id="composeButton" layoutX="194.0" layoutY="104.0" mnemonicParsing="false" onAction="#HandleCompose" prefHeight="36.0" prefWidth="100.0" text="Compose" />
-      <Button fx:id="bookmarkedButton" layoutX="194.0" layoutY="161.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Bookmarked" />
+      <Button fx:id="composeButton" layoutX="158.0" layoutY="104.0" mnemonicParsing="false" onAction="#HandleCompose" prefHeight="36.0" prefWidth="100.0" text="Compose" />
       <TableView fx:id="emailTableView" layoutX="366.0" layoutY="122.0" prefHeight="538.0" prefWidth="670.0">
         <columns>
           <TableColumn fx:id="dateColumn" prefWidth="164.79998779296875" text="Date" />
@@ -22,10 +21,10 @@
       <Button fx:id="logOutButton" layoutX="1101.0" layoutY="44.0" mnemonicParsing="false" onAction="#LogOutNow" prefHeight="26.0" prefWidth="88.0" text="Log out" />
       <Button fx:id="exitButton" layoutX="1101.0" layoutY="85.0" mnemonicParsing="false" onAction="#ExitApp" prefHeight="20.0" prefWidth="88.0" text="Exit" />
       <Button fx:id="DarkModeButton" layoutX="1101.0" layoutY="122.0" mnemonicParsing="false" onAction="#HandleDarkMode" prefHeight="26.0" prefWidth="88.0" text="Dark Mode" />
-      <TextField fx:id="searchBarField" layoutX="258.0" layoutY="44.0" onKeyPressed="#handleSearchKey" prefHeight="26.0" prefWidth="780.0" promptText="Search mail" />
-      <CheckBox fx:id="recipientCheckBox" layoutX="45.0" layoutY="148.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Recipient" />
-      <CheckBox fx:id="subjectCheckBox" layoutX="45.0" layoutY="179.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Subject" />
-      <CheckBox fx:id="bodyCheckBox" layoutX="45.0" layoutY="211.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Has the words" />
-      <Button fx:id="advanceSearchButton" layoutX="45.0" layoutY="104.0" mnemonicParsing="false" onAction="#HandleAdvanceSearch" prefHeight="36.0" prefWidth="100.0" text="Advance Search" />
+      <TextField fx:id="searchBarField" layoutX="258.0" layoutY="44.0" onKeyPressed="#HandleSearchKey" prefHeight="26.0" prefWidth="780.0" promptText="Search mail" />
+      <CheckBox fx:id="recipientCheckBox" layoutX="158.0" layoutY="210.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Recipient" />
+      <CheckBox fx:id="subjectCheckBox" layoutX="158.0" layoutY="236.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Subject" />
+      <CheckBox fx:id="bodyCheckBox" layoutX="158.0" layoutY="262.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Has the words" />
+      <Button fx:id="advanceSearchButton" layoutX="158.0" layoutY="161.0" mnemonicParsing="false" onAction="#HandleAdvanceSearch" prefHeight="36.0" prefWidth="100.0" text="Advance Search" />
    </children>
 </AnchorPane>

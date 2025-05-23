@@ -96,6 +96,10 @@ Added a simple search feature for local emails
 - Simply take the boolean value of each check boxes and use it as parameters for searchEmails()
 - To be added: search within date
 
+### Update 24.05.2025
+Added a view local email feature.
+- To view a local email in the table, double click the email (row) you want to see
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 

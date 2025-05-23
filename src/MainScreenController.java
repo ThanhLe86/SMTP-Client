@@ -46,9 +46,6 @@ public class MainScreenController implements Initializable {
     private Button composeButton;
 
     @FXML
-    private Button bookmarkedButton;
-
-    @FXML
     private Button logOutButton;
 
     @FXML
@@ -91,7 +88,6 @@ public class MainScreenController implements Initializable {
 
     //for the system
     private String userEmail;
-    private String userPassword;
     private SMTP_Connection tempConnection;
     private ObservableList<Email> emailList;        //observable list of emails as it can listen to changes
     private static boolean advanceSearch = false;    //toggle for advanced search
@@ -99,7 +95,6 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	composeButton.setVisible(true);
-        bookmarkedButton.setVisible(true);
 
         recipientCheckBox.setVisible(false);
         subjectCheckBox.setVisible(false);
@@ -119,15 +114,22 @@ public class MainScreenController implements Initializable {
         emailTableView.setPlaceholder(new Label("No emails yet!"));
 
         // Initialization logic if needed (e.g., setting up the gridPane)
+        // set up the click-to-view function
+        emailTableView.setOnMouseClicked(event -> {
+            try {
+                HandleViewEmail(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void initializeData(String email,SMTP_Connection connection) {
-        this.userEmail = email;
+    public void initializeData(String userEmail,SMTP_Connection connection) {
+        this.userEmail = userEmail;
         this.tempConnection = connection;
 
         System.out.println("User logged in");
         System.out.println("User email: " + this.userEmail);
-        System.out.println("User pass: " + this.userPassword);
 
         // Load and display emails
         // List<Email> emails = Email.readEmails(this.userEmail);
@@ -179,7 +181,6 @@ public class MainScreenController implements Initializable {
     
         // Clear user data
         this.userEmail = null;
-        this.userPassword = null;
     
         System.out.println("Logged out. Returned to LogIn.fxml.");
     }
@@ -236,7 +237,7 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void handleSearchKey(KeyEvent event) {
+    private void HandleSearchKey(KeyEvent event) {
         if (event.getCode() != KeyCode.ENTER) return;
         
         String query = searchBarField.getText().toLowerCase().trim();
@@ -255,4 +256,32 @@ public class MainScreenController implements Initializable {
         ObservableList<Email> results = SearchEngine.searchEmails(emailList, query, searchSubject, searchBody, searchRecipient);
         emailTableView.setItems(results);
     }
+
+    private void HandleViewEmail(MouseEvent event) throws IOException {
+        // Only trigger on double click
+        if (event.getClickCount() != 2) return;
+        
+        // check if doublle-clicked on an email
+        Email selectedEmail = emailTableView.getSelectionModel().getSelectedItem();
+        if (selectedEmail == null) return;
+    
+        // Load Mail.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Mail.fxml"));
+        Parent root = loader.load();
+    
+        ViewMailController viewMailController = loader.getController();
+        viewMailController.initializeData(selectedEmail, this.userEmail, this.tempConnection);
+    
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 1280, 720); 
+    
+        ThemeManager.applyTheme(scene);
+    
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    
+        System.out.println("Mail.fxml Opened for: " + selectedEmail.getSubject());
+    }
+    
 }

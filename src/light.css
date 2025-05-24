@@ -1,0 +1,39 @@
+.root {
+    -fx-background-color: white;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: #ccc;
+}
+
+.label {
+    -fx-text-fill: black;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: #ddd;
+    -fx-control-inner-background: white;
+    -fx-text-fill: black;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.table-row-cell:filled:selected, .table-row-cell:focused:selected {
+    -fx-background-color: #d0e0ff;
+}
+
+.table-view .column-header {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.check-box {
+    -fx-text-fill: black;
+}
+

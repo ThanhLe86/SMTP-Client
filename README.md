@@ -99,6 +99,7 @@ Added a simple search feature for local emails
 ### Update 24.05.2025
 Added a view local email feature.
 - To view a local email in the table, double click the email (row) you want to see
+- Instead of reading the Body column in the table (which is not in correct format since we removed "\n" for display), we will use the date and time in the table, revert it to the correct format of the .txt file (which contains the body), and read the body from it.
 
 ## Dependency Management
 

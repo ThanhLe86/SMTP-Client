@@ -27,13 +27,22 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 - Caveat: It is still not clear if fakeSMTP can successfully receive emails from the program yet. Additionally, one drawback of fakeSMTP is that it does not feature authentication process like big email servers, so it is currently still best to test the program using google's gmail server.
 
 ## How to install and run
+*For the source code*
 - Pull the project to your device
-- In `JAVA PROJECTS` (bottom left of the screen), find 'Referenced Libraries' and add all JavaFX .jar files in lib folder (currently 24.0.1)
-- In launch.json, look for "vmArgs", then change the module path "D:/openjfx-24.0.1_windows-x64_bin-sdk/javafx-sdk-24.0.1/lib" to your local JavaFX SDK's lib folder.
-- Use Ctrl+Alt+N to run code or click on the triangle on the top right of the screen
+- Open the project in VScode
+- On the left side, in the "Run and Debug" view, open yhe dropdown menu nect to the green runb button and choose "LaunchConfig"
+- Now you can run the app uding the green button
+- If you want to run the project in the VScode terminal, follow the following instruction:
+    - Change the terminal directory to the project folder instead of the project src folder
+    - Copy the following 2 lines into it and press enter:
+        javac --module-path javafx-sdk-24.0.1/lib --add-modules javafx.controls,javafx.fxml -d bin src/Main.java
+        java --module-path javafx-sdk-24.0.1/lib --add-modules javafx.controls,javafx.fxml -cp bin Main
 
-## TO DO
-- Debug the stack screenHistory in Controller.java: current cannot turn back to LogIn.fxml from Main.fxml
+
+*For the executable*
+- Pull the project to your device
+- Open the "executable" folder
+- Click and run the "run.bat" file, the app will run automatically 
 
 
 
@@ -100,6 +109,8 @@ Added a simple search feature for local emails
 Added a view local email feature.
 - To view a local email in the table, double click the email (row) you want to see
 - Instead of reading the Body column in the table (which is not in correct format since we removed "\n" for display), we will use the date and time in the table, revert it to the correct format of the .txt file (which contains the body), and read the body from it.
+- The project can now be run on all machines without needing to configure run directory upon importing, to run the project, follow the instruction in the "How to install and run" section above.
+- An executable .jar file is now available for ease of use, the project can is now ready for demo and concluded if there are no further testing issues.
 
 ## Dependency Management
 

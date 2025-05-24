@@ -30,8 +30,8 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 *For the source code*
 - Pull the project to your device
 - Open the project in VScode
-- On the left side, in the "Run and Debug" view, open yhe dropdown menu nect to the green runb button and choose "LaunchConfig"
-- Now you can run the app uding the green button
+- On the left side, in the "Run and Debug" view, open the dropdown menu nect to the green run button and choose "LaunchConfig"
+- Now you can run the app using the green button
 - If you want to run the project in the VScode terminal, follow the following instruction:
     - Change the terminal directory to the project folder instead of the project src folder
     - Copy the following 2 lines into it and press enter:

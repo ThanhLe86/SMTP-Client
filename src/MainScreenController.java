@@ -298,7 +298,7 @@ public class MainScreenController implements Initializable {
         ViewMailController viewMailController = loader.getController();
         viewMailController.initializeData(selectedEmail, this.userEmail, this.tempConnection);
     
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1280, 720); 
     
         ThemeManager.applyTheme(scene);

@@ -181,11 +181,37 @@ public class MainScreenController implements Initializable {
     
         // Clear user data
         this.userEmail = null;
+
+        //standard procedure for terminating connection: RESET() first, then QUIT()
+        try{
+            this.tempConnection.Reset();
+        } catch (IOException r){
+            r.printStackTrace();
+        }
+
+        try{
+            this.tempConnection.Quit();
+        } catch (IOException q){
+            q.printStackTrace();
+        }
     
         System.out.println("Logged out. Returned to LogIn.fxml.");
     }
     
     public void ExitApp(ActionEvent e) {
+        //standard procedure for terminating connection: RESET() first, then QUIT()
+        try{
+            this.tempConnection.Reset();
+        } catch (IOException r){
+            r.printStackTrace();
+        }
+
+        try{
+            this.tempConnection.Quit();
+        } catch (IOException q){
+            q.printStackTrace();
+        }
+        
         Platform.exit();
         System.exit(0);
         System.out.println("Stopped");

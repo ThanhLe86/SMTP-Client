@@ -112,6 +112,13 @@ Added a view local email feature.
 - The project can now be run on all machines without needing to configure run directory upon importing, to run the project, follow the instruction in the "How to install and run" section above.
 - An executable .jar file is now available for ease of use, the project can is now ready for demo and concluded if there are no further testing issues.
 
+### Update 26.05.2025
+Regarding connection termination procedures:
+- By Google's SMTP Server standard, all connection must firstly be reset via RSET command, then use QUIT command.
+- Therefore, we give an update regarding logics for ExitApp() and LogOut()
+- When clicking Exit button, which will invoke ExitApp(), tempConnection will do as aformentioned
+- When clicking Log Out button, which will invoke LogOutNow(), tempConnection for the instance MainScreenController will do as aformentioned. After that, when clicking Exit button in LogIn.fxml, then it will check if tempConnection for the instance LogInController is null, as if we click it the first time without logging in, no tempConnection is made and therefore still null, which will return errors.
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. 

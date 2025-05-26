@@ -1,10 +1,5 @@
 /*
  * Email data structure
- * 
- * TO DO:
- * - Fix a bug which emailBody is now stored correctly in the database? 
- *      - only the first line is stored but still show full if open csv from VSC
- *      - make the emailTableView retrieve the full email body incorrectly (also only the first line, cannot concatenate to a single line)
  */
 import java.io.BufferedReader;
 import java.io.File;

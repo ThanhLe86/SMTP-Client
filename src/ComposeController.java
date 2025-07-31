@@ -89,7 +89,7 @@ public class ComposeController implements Initializable {
         sendButton.setVisible(true);
         exitButton.setVisible(true);
         attachmentLabel.setText("No file attached");
-        attachmentLabel.setTextFill(Color.color(23.0, 21.0, 181.0)); // label blue
+        attachmentLabel.setTextFill(Color.rgb(23, 21, 181)); // label blue
 
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
@@ -123,7 +123,7 @@ public class ComposeController implements Initializable {
             this.emailBody == null || this.emailBody.isEmpty()) {
             warningLabel.setVisible(true);
             warningLabel.setText("Please fill in all fields.");
-            warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
+            warningLabel.setTextFill(Color.rgb(255, 0, 0)); // label red
             System.out.println("Please fill in all fields.");
             return; 
         }
@@ -131,7 +131,7 @@ public class ComposeController implements Initializable {
         //After pressing Send
         warningLabel.setVisible(true);
         warningLabel.setText("Please wait...");
-        warningLabel.setTextFill(Color.color(1.0, 1.0, 0.0)); // label yellow
+        warningLabel.setTextFill(Color.rgb(255, 251, 0)); // label yellow
 
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
         if (attachmentFile != null) {
@@ -141,7 +141,7 @@ public class ComposeController implements Initializable {
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
 
             warningLabel.setText("Email sent successfully!");
-            warningLabel.setTextFill(Color.color(9.0, 133.0, 13.0)); // label green
+            warningLabel.setTextFill(Color.rgb(9, 133, 13)); // label green
             sendButton.setVisible(false);
             cancelButton.setText("Return");
 
@@ -149,7 +149,7 @@ public class ComposeController implements Initializable {
 
         } else{
             warningLabel.setText("Something went wrong.");
-            warningLabel.setTextFill(Color.color(1.0, 0.0, 0.0)); // label red
+            warningLabel.setTextFill(Color.rgb(255, 0, 0)); // label red
             System.out.println("Something went wrong");
         }
     }

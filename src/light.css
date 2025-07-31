@@ -1,9 +1,9 @@
 .root {
-    -fx-background-color: white;
+    -fx-background-color: ivory;
 }
 
 .button {
-    -fx-background-color: white;
+    -fx-background-color: rgb(238, 242, 214);
     -fx-text-fill: black;
     -fx-border-color: #ccc;
 }
@@ -13,9 +13,9 @@
 }
 
 .table-view {
-    -fx-background-color: white;
+    -fx-background-color: rgb(219, 217, 217);
     -fx-table-cell-border-color: #ddd;
-    -fx-control-inner-background: white;
+    -fx-control-inner-background: rgb(219, 217, 217);
     -fx-text-fill: black;
 }
 

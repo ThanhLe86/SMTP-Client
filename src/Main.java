@@ -50,6 +50,7 @@ public class Main extends Application {
 			//BorderPane root = new BorderPane();
 			Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
 			Scene scene = new Scene(root,1280,720);
+            scene.getStylesheets().add(getClass().getResource("light.css").toExternalForm());
 			//String cssString = this.getClass().getResource("application.css").toExternalForm();
 			//scene.getStylesheets().add(cssString);
 			primaryStage.setScene(scene);

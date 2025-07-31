@@ -1,6 +1,12 @@
 # SMTP Client implementation using Java
 
-Welcome to our Java project for SMTP Client Implementation. Here is a guide on how the project can be run.
+Welcome to our Java project for SMTP Client Implementation. 
+This project is made by Le Binh Thanh (ThanhLe86) and Huynh Thien Bao (coldoctopus) from Vietnamese-German University.
+The aim of this project is to simulate transfer protocol manually, as per the requirement of the module Computer Network 2 (from the program BSc in Computer Science from VGU).
+Therefore, some aspects in software development are not developed in this project, but instead be simulated by other measures.
+
+
+Here is a guide on how the project can be run.
 
 ## Details
 

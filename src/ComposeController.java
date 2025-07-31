@@ -38,6 +38,9 @@ import javafx.scene.input.MouseEvent;   //clicks on emails
 
 import javafx.scene.control.TextArea;   //email body
 
+import javafx.stage.FileChooser;
+import java.util.*;
+
 public class ComposeController implements Initializable {
     //for .fxml elements
     @FXML
@@ -64,12 +67,20 @@ public class ComposeController implements Initializable {
     @FXML
     private Button DarkModeButton;
 
+    @FXML
+    private Button attachButton;
+
+    @FXML
+    private Label attachmentLabel;
+
     //for the system
     private String userEmail;
     private String recipientEmail;
     private String emailSubject;
     private String emailBody;
     private SMTP_Connection tempConnection;
+    private File attachmentFile;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -77,6 +88,8 @@ public class ComposeController implements Initializable {
         cancelButton.setVisible(true);
         sendButton.setVisible(true);
         exitButton.setVisible(true);
+        attachmentLabel.setText("No file attached");
+        attachmentLabel.setTextFill(Color.color(23.0, 21.0, 181.0)); // label blue
 
         // Initialization logic if needed (e.g., setting up the gridPane)
     }
@@ -121,11 +134,14 @@ public class ComposeController implements Initializable {
         warningLabel.setTextFill(Color.color(1.0, 1.0, 0.0)); // label yellow
 
         Courier newMail = new Courier(this.userEmail, this.recipientEmail, this.emailBody, this.emailSubject); //sender is automatically inputted by the system
+        if (attachmentFile != null) {
+            newMail.setAttachmentFile(attachmentFile);
+        }
         if(newMail.MailSender(tempConnection)){
             System.out.println("Send successful, check destination inbox! Maybe in Spam");
 
             warningLabel.setText("Email sent successfully!");
-            warningLabel.setTextFill(Color.color(0.0, 1.0, 0.0)); // label green
+            warningLabel.setTextFill(Color.color(9.0, 133.0, 13.0)); // label green
             sendButton.setVisible(false);
             cancelButton.setText("Return");
 
@@ -182,4 +198,16 @@ public class ComposeController implements Initializable {
         ThemeManager.toggleTheme(currentScene);
     }
 
+    @FXML
+    private void handleAttachFile() {
+        FileChooser fileChooser = new FileChooser();        // native from JavaFX, used to open a dialog to select files
+        fileChooser.setTitle("Select File to Attach");
+        File selectedFile = fileChooser.showOpenDialog(attachButton.getScene().getWindow());
+        if (selectedFile != null) {
+            this.attachmentFile = selectedFile;
+            attachmentLabel.setText("Attached: " + selectedFile.getName());
+        } else {
+            attachmentLabel.setText("No file selected");
+        }
+    }
 }

@@ -1,3 +1,35 @@
+### Update 31.07.2025
+- SMTP does not support sending emails with attached files. Therefore, we will use one of its extensions: Multipurpose Internet Mail Extensions message, which can be used to send non-textual content (pictures, audios, etc.) or different character sets (beyond US-ASCII characters)
+- Since we are not allowed to use extra libraries, we will construct the email manually in this structure (example):
+From: <sender@example.com>          (1)
+To: <receiver@example.com>
+Subject: Email with Attachment
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="====BOUNDARY_1722449141653===="
+
+--====BOUNDARY_1722449141653====    (2)
+Content-Type: text/plain; charset="utf-8"       (3)
+Content-Transfer-Encoding: 7bit
+
+Hello,
+This email contains an attachment.
+
+--====BOUNDARY_1722449141653====
+Content-Type: application/octet-stream; name="report.pdf"   (4)
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="report.pdf"
+
+JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9MZW5ndGggMzE4Pj4Kc3RyZWFtC...
+(more base64 lines)
+
+--====BOUNDARY_1722449141653====--      (5)
+
+(1) Headers (basic SMTP headers + MIME version and Content-Type)
+(2) Boundary (starts multipart message)
+(3) Text part   (content type, encoding)
+(4) Attachment part (content type, encoding, disposition)
+(5) Closing Boundary
+
 ### Update 26.05.2025
 Regarding connection termination procedures:
 - By Google's SMTP Server standard, all connection must firstly be reset via RSET command, then use QUIT command.
